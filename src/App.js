@@ -39,12 +39,16 @@ const SecurityApp = () => {
     //Encode combined IV and ciphertext to Base64
     var base64CipherText = CryptoJS.enc.Base64.stringify(cipherTextCombined);
 
-    return base64CipherText;
+    var encodedText = encodeURIComponent(base64CipherText);
+
+    return encodedText;
   };
 
   const decryptFromSHAString = (cipherText, key) => {
+     
+    const decodedURI = decodeURIComponent(cipherText);
     //Decode Base64 to WordArray
-    var cipherTextCombined = CryptoJS.enc.Base64.parse(cipherText);
+    var cipherTextCombined = CryptoJS.enc.Base64.parse(decodedURI);
 
     // Extract IV and ciphertext
     var iv = CryptoJS.lib.WordArray.create(
